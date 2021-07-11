@@ -1,0 +1,161 @@
+﻿
+<nav>
+    <div class="panel-body left">
+        <button type="button" class="btn btn-info " data-target="#AdicionarPessoa" data-toggle="modal">
+            Adicionar Pessoa
+        </button>
+    </div>
+</nav>
+<div class="container" ng-controller="pessoaCtrl">
+    @*inicio <div> panel panel-info*@
+    <div class="panel panel-info">
+        <div class="panel panel-heading text-center">Lista de Pessoas</div>
+        <table class="table table-bordered center">
+            <thead style="background-color: grey;">
+                <tr>
+                    <th class="text text-center">ID</th>
+                    <th class="text text-center">Código</th>
+                    <th class="text text-center">Nome</th>
+                    <th class="text text-center">Cpf</th>
+                    <th class="text text-center">Endereço</th>
+                    <th class="text text-center">Telefone</th>
+                    <th class="text text-center">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pess in Pessoas">
+                    <td class="text text-center">{{pess.PessoaId}}</td>
+                    <td class="text text-center">{{pess.Codigo}}</td>
+                    <td class="text text-center">{{pess.Nome}}</td>
+                    <td class="text text-center">{{pess.Cpf}}</td>
+                    <td class="text text-center">{{pess.Endereco}}</td>
+                    <td class="text text-center">{{pess.Telefone}}</td>
+                    <td class="text text-center" style="width: 200px">
+                        <a href="#"
+                           data-target="#AtualizarPessoa"
+                           data-toggle="modal" class="btn btn-success"
+                           ng-click="atualizarPessoaPorId(pess)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+
+                        <a href="#"
+                           data-target="#ExcluirPessoa"
+                           data-toggle="modal" class="btn btn-danger"
+                           ng-click="excluirPessoaPorId(pess)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        @*inicio modal criar*@
+        <div class="modal" id="AdicionarPessoa" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Adicionar Pessoa</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="AdicionarNovaPessoaForm">
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" name="pessoaId" type="hidden" placeholder="Id Pessoa" />
+                            </div>
+
+                            <div class="form-group">
+                                <input class="form-control" type="number" name="codigo" ng-model="codigo" placeholder="Código" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="nome" required="required" ng-model="nome" placeholder="Nome" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" pattern="\d*" maxlength="11" name="cpf" required="required" ng-model="cpf" placeholder="Cpf - Apenas números" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="endereco" ng-model="endereco" placeholder="Endereço" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" pattern="\d*" maxlength="11" name="telefone" ng-model="telefone" placeholder="Telefone - DDD e números juntos" />
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSalvar" data-dismiss="modal" ng-click="adicionarPessoa()">Adicionar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="limparDados()">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*fim modal criar*@
+
+        @*inicio modal atualizar*@
+        <div class="modal" id="AtualizarPessoa" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-warning">Atualizar Pessoa</h3>
+                    </div>
+                    <div class="modal-body" style="margin-left: 20px">
+                        <form class="form-horizontal" name="AtualizarForm">
+                            <div class="form-group">
+                                <input class="form-control" readonly="readonly" name="PessoaId" ng-model="AtualizadaPessoaId" type="hidden" placeholder="Id Pessoa" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="Codigo" ng-model="AtualizadaCodigo" placeholder="Código" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="Nome" required="required" ng-model="AtualizadaNome" placeholder="Nome" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="Cpf" pattern="\d*" maxlength="11" required="required" ng-model="AtualizadaCpf" placeholder="Cpf" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" name="Endereco" ng-model="AtualizadaEndereco" placeholder="Endereço" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" pattern="\d*" maxlength="11" name="Telefone" ng-model="AtualizadaTelefone" placeholder="Telefone" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnAtualizar" data-dismiss="modal" ng-click="atualizarPessoa()">Atualizar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*fim modal atualizar*@
+
+        @*inicio modal excluir*@
+        <div class="modal" role="dialog" id="ExcluirPessoa">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Você tem certeza que deseja excluir a Pessoa?</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <p>Id da Pessoa : {{AtualizadaPessoaId}}</p>
+                            <p>Nome da Pessoa : {{AtualizadaNome}}</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="excluirPessoa(AtualizadaPessoaId)">Excluir</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*fim modal excluir*@
+
+    </div>
+    @*fim <div> panel panel-info*@
+
+</div>
+
+@section scripts {
+    <script src="~/AngularJsApp/Pessoa/Module.js"></script>
+    <script src="~/AngularJsApp/Pessoa/Service.js"></script>
+    <script src="~/AngularJsApp/Pessoa/Controller.js"></script>
+}

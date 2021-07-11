@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PessoasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Pessoa">
+    <Key>
+      <PropertyRef Name="PessoaId" />
+    </Key>
+    <Property Name="PessoaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo" Type="Int32" />
+    <Property Name="Nome" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cpf" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Endereco" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Telefone" Type="String" MaxLength="11" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="PessoasEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Pessoas" EntityType="Self.Pessoa" />
+  </EntityContainer>
+</Schema>
