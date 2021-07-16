@@ -121,4 +121,16 @@
             alert("Ocorreu um erro ao excluir")
         });
     }
+
+    //login com module
+    $scope.submit = function () {
+        var username = $scope.username;
+        var password = $scope.password;
+        if ($scope.username == 'SISTEMA' && $scope.password == 'candidato123') {
+            alert("Logado com sucesso!")
+        } else {
+            alert("Login errado!")
+        }
+    }
 });
+

@@ -1,15 +1,20 @@
-﻿
-<nav>
-    <div class="panel-body left">
-        <button type="button" class="btn btn-info " data-target="#AdicionarPessoa" data-toggle="modal">
-            Adicionar Pessoa
+﻿<nav>
+    <div class="panel-body">
+        <button type="button" class="btn btn-success center-block btn-lg"  data-target="#Login" data-toggle="modal">
+            Login
         </button>
     </div>
+        <div class="panel-body left">
+            <button type="button" class="btn btn-info" data-target="#AdicionarPessoa" data-toggle="modal">
+                Adicionar Pessoa
+            </button>
+        </div>
 </nav>
 <div class="container" ng-controller="pessoaCtrl">
     @*inicio <div> panel panel-info*@
     <div class="panel panel-info">
         <div class="panel panel-heading text-center">Lista de Pessoas</div>
+        @*inicio tabela de lista de pessoas*@
         <table class="table table-bordered center">
             <thead style="background-color: grey;">
                 <tr>
@@ -48,6 +53,31 @@
                 </tr>
             </tbody>
         </table>
+        @*fim tabela de lista de pessoas*@
+
+        @*inicio modal Login*@
+        <div class="modal" id="Login" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-info">Login</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form action="~/Views/Home/Index.cshtml" id="Login">
+                            <div class="form-group">
+                                Usuário<input class="form-control" type="text" id="username" ng-model="username" placeholder="Usuário" />
+                            </div>
+                            <div class="form-group">
+                                Senha<input class="form-control" type="text" id="password" ng-model="password" placeholder="Senha" />
+                            </div>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit()">Login</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*fim modal Login*@
 
         @*inicio modal criar*@
         <div class="modal" id="AdicionarPessoa" role="dialog">
@@ -151,7 +181,6 @@
 
     </div>
     @*fim <div> panel panel-info*@
-
 </div>
 
 @section scripts {
